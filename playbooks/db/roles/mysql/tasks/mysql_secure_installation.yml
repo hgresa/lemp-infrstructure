@@ -1,0 +1,13 @@
+---
+- name: Set the root password
+  mysql_user:
+    user: root
+    password: "{{ mysql_root_password }}"
+    host: localhost
+  no_log: true
+
+- name: Delete anonymous MySQL server user
+  mysql_user:
+    user: ""
+    host: "{{ host }}"
+    state: absent

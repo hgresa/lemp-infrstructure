@@ -1,0 +1,6 @@
+---
+mysql_users:
+  - name: magento
+    host: "{{ lemp_www }}[0] }}"
+    password: "randomPass123"
+    priv: "magento.*:ALL"

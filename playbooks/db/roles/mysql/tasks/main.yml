@@ -1,3 +1,24 @@
 ---
 - name: Include OS-specific mysql install tasks
-  include_tasks: "install-mysql-repo-{{ ansible_distribution|lower }}.yml"
+  include_tasks: "install-mysql-{{ ansible_distribution|lower }}.yml"
+
+- name: Ensure mysql service is started and enabled
+  service:
+    name: mysql
+    state: started
+    enabled: true
+
+- name: Ensure all databases are created
+  mysql_db:
+    name: "{{ mysql_databases }}"
+    state: present
+  when: "mysql_databases is defined"
+
+- name: Ensure all users are created
+  mysql_user:
+    name: "{{ item.name }}"
+    host: "{{ item.host }}"
+    password: "{{ item.password }}"
+    priv: "{{ item.priv }}"
+  with_items: "{{ mysql_users }}"
+  when: "mysql_users is defined"
