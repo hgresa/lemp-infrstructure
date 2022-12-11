@@ -1,0 +1,21 @@
+---
+- name: Include OS-specific repo install tasks
+  include_tasks: "install-php-repo-{{ ansible_distribution|lower }}.yml"
+
+- name: Install PHP
+  action: "{{ ansible_pkg_mgr }} name=php{{ version }} state=present"
+
+- name: Install PHP FPM
+  action: "{{ ansible_pkg_mgr }} name=php{{ version }}-fpm state=present"
+
+- name: Gather available packages  # ubuntu for now
+  shell: "apt-cache search php{{ version }}"
+  args:
+    executable: /bin/bash
+  register: available_packages
+  changed_when: false
+
+- name: "Install packages"
+  action: "{{ ansible_pkg_mgr }} name={{ item }} state=present"
+  with_items: "{{ packages }}"
+  when: "item in available_packages.stdout and packages|length > 0"

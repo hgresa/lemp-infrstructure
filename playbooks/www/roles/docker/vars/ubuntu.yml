@@ -1,0 +1,16 @@
+---
+old_packages:
+  - docker
+  - docker-engine
+  - docker.io
+  - containerd
+  - runc
+
+new_packages:
+  - docker-ce
+  - docker-ce-cli
+  - containerd.io
+  - docker-compose-plugin
+
+keyrings_path: /etc/apt/keyrings
+docker_keyring_path: "{{ keyrings_path }}/docker.gpg"

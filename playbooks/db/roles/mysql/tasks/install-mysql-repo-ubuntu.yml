@@ -1,0 +1,18 @@
+---
+- name: Import mysql PGP key
+  apt_key:
+    keyserver: keyserver.ubuntu.com
+    id: 467B942D3A79BD29
+
+- name: Add mysql repo
+  apt_repository:
+    repo: "deb http://repo.mysql.com/apt/{{ ansible_distribution|lower }} 
+      {{ ansible_distribution_release }} mysql-{{ version }}"
+    update_cache: true
+
+- name: Install mysql
+  apt:
+    package:
+      - "mysql-server={{ version }}*"
+    state: present
+    update_cache: true

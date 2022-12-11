@@ -1,0 +1,7 @@
+---
+- hosts: lemp_db
+  become: true
+
+  roles:
+    - name: mysql
+      version: 5.7

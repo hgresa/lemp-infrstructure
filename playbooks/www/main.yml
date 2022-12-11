@@ -1,0 +1,17 @@
+---
+- hosts: lemp_www
+  become: true
+
+  vars:
+    php_version: 7.4
+    application_name: magento
+    application_version: 2.4
+
+  vars_files:
+    - "vars/{{ application_name }}-{{ application_version }}.yml"
+
+  roles:
+    - name: nginx
+    - name: php
+      version: "{{ php_version }}"
+      # packages: "{{ packages }}"

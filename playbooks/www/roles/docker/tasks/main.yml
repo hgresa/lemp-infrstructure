@@ -1,0 +1,29 @@
+---
+- name: Include OS Specific variables
+  include_vars: "{{ ansible_distribution|lower }}.yml"
+
+- name: Uninstall old docker packages
+  action: "{{ ansible_pkg_mgr }} state=absent name={{ old_packages }}"
+
+- name: Include OS-specific docker repo install tasks
+  include_tasks: "install-docker-repo-{{ ansible_os_family|lower }}.yml"
+
+- name: Install Docker packages
+  action: "{{ ansible_pkg_mgr }} state=present name={{ new_packages }}"
+
+- name: Ensure Docker daemon is started and enabled
+  service:
+    name: docker
+    state: started
+    enabled: true
+
+- name: Ensure docker group exists
+  group:
+    name: docker
+    state: present
+
+- name: Ensure current user is added to the docker group
+  user:
+    name: "{{ ansible_user }}"
+    groups: docker
+    append: true

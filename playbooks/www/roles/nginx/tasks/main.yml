@@ -1,0 +1,11 @@
+---
+# - name: Install Epel repo
+
+- name: Install Nginx
+  action: "{{ ansible_pkg_mgr }} name=nginx state=present update_cache=true"
+
+- name: Ensure nginx is started and enabled
+  service:
+    name: nginx
+    state: started
+    enabled: true
