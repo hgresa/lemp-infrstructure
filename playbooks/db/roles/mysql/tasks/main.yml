@@ -1,6 +1,17 @@
 ---
+- name: Install Python 3 pip
+  action: "{{ ansible_pkg_mgr }} name=python3-pip state=present"
+
+- name: Install Python PyMySQL module
+  pip:
+    name: PyMySQL
+    state: present
+
 - name: Include OS-specific mysql install tasks
   include_tasks: "install-mysql-{{ ansible_distribution|lower }}.yml"
+
+- name: Include MySQL secure installation tasks
+  include_tasks: "mysql_secure_installation.yml"
 
 - name: Ensure mysql service is started and enabled
   service:

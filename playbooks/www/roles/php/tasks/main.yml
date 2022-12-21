@@ -9,7 +9,7 @@
   action: "{{ ansible_pkg_mgr }} name=php{{ version }}-fpm state=present"
 
 - name: Gather available packages and check before installing package
-  group:
+  block:
     - name: Gather available packages  # ubuntu for now
       shell: "apt-cache search php{{ version }}"
       args:

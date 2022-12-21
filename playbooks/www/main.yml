@@ -3,9 +3,9 @@
   become: true
 
   vars:
-    php_version: 7.4
-    application_name: magento
-    application_version: 2.4
+    php_version: 8.0
+    application_name: laravel
+    application_version: 9
 
   vars_files:
     - "vars/{{ application_name }}-{{ application_version }}.yml"

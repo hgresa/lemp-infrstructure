@@ -3,9 +3,18 @@
   become: true
 
   pre_tasks:
-    include_vars:
-      - vars/mysql_users.yml
-      - vars/mysql_databases.yml
+    - name: Include MySQL variables
+      include_vars: "{{ item }}"
+      with_items:
+        - vars/mysql_users.yml
+        - vars/mysql_databases.yml
+
+    - name: Copy .my.cnf file to the host
+      template:
+        src: templates/.my.cnf.j2
+        dest: /root/.my.cnf
+        owner: root
+        group: root
 
   roles:
     - name: mysql
