@@ -12,3 +12,4 @@ packages:
   - php{{ php_version }}-pdo
   - php{{ php_version }}-tokenizer
   - php{{ php_version }}-xml
+  - php{{ php_version }}-fpm

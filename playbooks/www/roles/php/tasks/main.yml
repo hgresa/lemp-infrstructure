@@ -1,12 +1,9 @@
 ---
 - name: Include OS-specific repo install tasks
-  include_tasks: "install-php-repo-{{ ansible_distribution|lower }}.yml"
+  include_tasks: "install-php-repo-{{ ansible_os_family|lower }}.yml"
 
 - name: Install PHP
   action: "{{ ansible_pkg_mgr }} name=php{{ version }} state=present"
-
-- name: Install PHP FPM
-  action: "{{ ansible_pkg_mgr }} name=php{{ version }}-fpm state=present"
 
 - name: Gather available packages and check before installing package
   block:

@@ -1,0 +1,16 @@
+---
+- name: Install EPEL repo.
+  yum:
+    name: epel-release
+    state: present
+
+- name: Import Remi GPG key
+  rpm_key:
+    key: https://rpms.remirepo.net/RPM-GPG-KEY-remi2018
+    state: present
+
+- name: Install Remi repo
+  yum:
+    name: "https://rpms.remirepo.net/enterprise/
+      remi-release-{{ ansible_distribution_major_version }}.rpm"
+    state: present
