@@ -1,5 +1,5 @@
 ---
-- hosts: lemp_db
+- hosts: lemp_www
   become: true
 
   pre_tasks:
@@ -12,7 +12,7 @@
     - name: Copy .my.cnf file to the host
       template:
         src: templates/.my.cnf.j2
-        dest: /root/.my.cnf
+        dest: "/root/.my.cnf"
         owner: root
         group: root
 

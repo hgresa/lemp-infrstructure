@@ -1,8 +1,8 @@
 ---
 mysql_users:
-  - name: magento
-    host: "192.168.56.10"
+  - name: redberry_practice
+    host: "localhost"
     password: "randomPass123"
-    priv: "magento.*:ALL"
+    priv: "redberry_practice.*:ALL"
 
 mysql_root_password: "randomPass123"
