@@ -9,13 +9,6 @@
         - vars/mysql_users.yml
         - vars/mysql_databases.yml
 
-    - name: Copy .my.cnf file to the host
-      template:
-        src: templates/.my.cnf.j2
-        dest: "/root/.my.cnf"
-        owner: root
-        group: root
-
   roles:
     - name: mysql
       version: 8.0

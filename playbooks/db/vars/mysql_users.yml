@@ -1,8 +1,8 @@
 ---
+mysql_root_password: "randomPass123"
+
 mysql_users:
   - name: redberry_practice
     host: "localhost"
     password: "randomPass123"
     priv: "redberry_practice.*:ALL"
-
-mysql_root_password: "randomPass123"

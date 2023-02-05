@@ -1,0 +1,13 @@
+---
+- name: Ensure mysql service is started and enabled
+  service:
+    name: mysql
+    state: started
+    enabled: true
+
+- name: Copy .my.cnf file to the host
+  template:
+    src: templates/.my.cnf.j2
+    dest: "/root/.my.cnf"
+    owner: root
+    group: root
